@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+       padding: 0;
+}
+.container {
+    padding: 12px 90px;
+}
+ .all{
+     display: flex;
+    justify-content: space-around;
+}
