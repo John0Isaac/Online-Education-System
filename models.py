@@ -19,6 +19,7 @@ def setup_db(app, database_path=database_path):
     db.init_app(app)
     db.create_all()
 
+
 '''
 Student
 
@@ -50,17 +51,6 @@ class Student(db.Model):
         self.specialization_id = specialization_id
         self.section_id = section_id
 
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
     def format(self):
         return {
             'id': self.id,
@@ -74,6 +64,7 @@ class Student(db.Model):
             'specialization_id': self.specialization_id,
             'section_id': self.section_id
         }
+
 
 '''
 Staff
@@ -93,7 +84,7 @@ class Staff(db.Model):
     job = Column(String)
     date_of_birth = Column(String)
     logincode = Column(String)
-    data_id = Column(Integer, ForeignKey('specialization.id'), nullable=False)
+    data_id = Column(Integer, ForeignKey('data.id'), nullable=False)
 
     def __init__(self, name, email, address, phone, gender, job, date_of_birth, logincode, data_id):
         self.name = name
@@ -105,6 +96,47 @@ class Staff(db.Model):
         self.date_of_birth = date_of_birth
         self.logincode = logincode
         self.data_id = data_id
+
+    def format(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'address': self.address,
+            'phone': self.phone,
+            'gender': self.gender,
+            'job': self.job,
+            'date_of_birth': self.date_of_birth,
+            'logincode': self.logincode,
+            'data': self.data_id
+        }
+
+'''
+Data 
+
+'''
+
+
+class Data(db.Model):
+    ___tablename__ = 'data'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    short_description = Column(String(120))
+    description = Column(String)
+    link = Column(String(120))
+    type = Column(String)
+    comment = Column(String)
+    course_id = Column(Integer, ForeignKey('courses.id'), nullable=False)
+
+    def __init__(self, name, short_description, description, link, type, comment, course_id):
+        self.name = name
+        self.short_description = short_description
+        self.description = description
+        self.link = link
+        self.type = type
+        self.comment = comment
+        self.course_id = course_id
 
     def insert(self):
         db.session.add(self)
@@ -120,13 +152,10 @@ class Staff(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'address': self.address,
-            'phone': self.phone,
-            'gender': self.gender,
-            'job': self.job,
-            'date_of_birth': self.date_of_birth,
-            'logincode': self.logincode,
-            'data': self.data_id
+            'short_description': self.short_description,
+            'description': self.description,
+            'link': self.link,
+            'type': self.type,
+            'comment': self.comment,
+            'course_id': self.course_id
         }
