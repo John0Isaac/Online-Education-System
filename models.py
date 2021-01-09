@@ -34,19 +34,17 @@ class Student(db.Model):
     address = Column(String)
     phone = Column(String(120))
     gender = Column(String)
-    national_id = Column(String)
     date_of_birth = Column(String)
     logincode = Column(String)
     specialization_id = Column(Integer, ForeignKey('specialization.id'), nullable=False)
     section_id = Column(Integer, ForeignKey('section.id'), nullable=False)
 
-    def __init__(self, name, email, address, phone, gender, national_id, date_of_birth, logincode, specialization_id, section_id):
+    def __init__(self, name, email, address, phone, gender, date_of_birth, logincode, specialization_id, section_id):
         self.name = name
         self.email = email
         self.address = address
         self.phone = phone
         self.gender = gender
-        self.national_id = national_id
         self.date_of_birth = date_of_birth
         self.logincode = logincode
         self.specialization_id = specialization_id
@@ -71,9 +69,64 @@ class Student(db.Model):
             'address': self.address,
             'phone': self.phone,
             'gender': self.gender,
-            'national_id': self.national_id,
             'date_of_birth': self.date_of_birth,
             'logincode': self.logincode,
             'specialization_id': self.specialization_id,
             'section_id': self.section_id
+        }
+
+'''
+Staff
+
+'''
+
+
+class Staff(db.Model):
+    ___tablename__ = 'staff'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String(120))
+    address = Column(String)
+    phone = Column(String(120))
+    gender = Column(String)
+    job = Column(String)
+    date_of_birth = Column(String)
+    logincode = Column(String)
+    data_id = Column(Integer, ForeignKey('specialization.id'), nullable=False)
+
+    def __init__(self, name, email, address, phone, gender, job, date_of_birth, logincode, data_id):
+        self.name = name
+        self.email = email
+        self.address = address
+        self.phone = phone
+        self.gender = gender
+        self.job = job
+        self.date_of_birth = date_of_birth
+        self.logincode = logincode
+        self.data_id = data_id
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'address': self.address,
+            'phone': self.phone,
+            'gender': self.gender,
+            'job': self.job,
+            'date_of_birth': self.date_of_birth,
+            'logincode': self.logincode,
+            'data': self.data_id
         }
