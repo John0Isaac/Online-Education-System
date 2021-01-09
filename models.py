@@ -1,5 +1,5 @@
 from operator import add
-from sqlalchemy import Column, String, Integer, Boolean, ForeignKey, create_engine
+from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 
@@ -19,6 +19,14 @@ def setup_db(app, database_path=database_path):
     db.init_app(app)
     db.create_all()
 
+student_courses = Table('student_courses', db.Model.metadata,
+    Column('student_id', Integer, ForeignKey('student.id')),
+    Column('courses_id', Integer, ForeignKey('courses.id'))
+)
+staff_courses = Table('staff_courses', db.Model.metadata,
+    Column('courses_id', Integer, ForeignKey('courses.id')),
+    Column('staff_id', Integer, ForeignKey('staff.id'))
+)
 
 '''
 Student
@@ -39,6 +47,7 @@ class Student(db.Model):
     logincode = Column(String)
     specialization_id = Column(Integer, ForeignKey('specialization.id'), nullable=False)
     section_id = Column(Integer, ForeignKey('section.id'), nullable=False)
+    courses = db.relationship( "Courses", secondary=student_courses, back_populates="student")
 
     def __init__(self, name, email, address, phone, gender, date_of_birth, logincode, specialization_id, section_id):
         self.name = name
@@ -85,6 +94,7 @@ class Staff(db.Model):
     date_of_birth = Column(String)
     logincode = Column(String)
     data_id = Column(Integer, ForeignKey('data.id'), nullable=False)
+    courses = db.relationship( "Courses", secondary=staff_courses, back_populates="staff")
 
     def __init__(self, name, email, address, phone, gender, job, date_of_birth, logincode, data_id):
         self.name = name
@@ -125,6 +135,8 @@ class Courses(db.Model):
     name = Column(String)
     code = Column(String(120))
     data = db.relationship('Data', backref='courses', lazy='dynamic')
+    students = db.relationship("Student", secondary=student_courses, back_populates="courses")
+    staff = db.relationship("Staff", secondary=staff_courses, back_populates="courses")
 
     def __init__(self, name, code):
         self.name = name
@@ -234,3 +246,8 @@ class Data(db.Model):
             'comment': self.comment,
             'course_id': self.course_id
         }
+
+association_table = Table('student_courses', db.Model.metadata,
+    Column('sudent_id', Integer, ForeignKey('student.id')),
+    Column('courses_id', Integer, ForeignKey('courses.id'))
+)
