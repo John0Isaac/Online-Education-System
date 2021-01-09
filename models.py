@@ -111,6 +111,79 @@ class Staff(db.Model):
             'data': self.data_id
         }
 
+
+'''
+Courses
+
+'''
+
+
+class Courses(db.Model):
+    ___tablename__ = 'courses'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    code = Column(String(120))
+    data = db.relationship('Data', backref='courses', lazy='dynamic')
+
+    def __init__(self, name, code):
+        self.name = name
+        self.code = code
+
+    def format(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'code': self.code,
+        }
+
+
+'''
+Section
+
+'''
+
+
+class Section(db.Model):
+    ___tablename__ = 'section'
+
+    id = Column(Integer, primary_key=True)
+    number = Column(String)
+    Student = db.relationship('Student', backref='section', lazy='dynamic')
+
+    def __init__(self, number):
+        self.number = number
+
+    def format(self):
+        return {
+            'id': self.id,
+            'number': self.name
+        }
+
+
+'''
+Specialization
+
+'''
+
+
+class Specialization(db.Model):
+    ___tablename__ = 'specialization'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    student = db.relationship('Student', backref='specialization', lazy='dynamic')
+
+    def __init__(self, name, code):
+        self.name = name
+
+    def format(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
+
 '''
 Data 
 
@@ -137,6 +210,7 @@ class Data(db.Model):
         self.type = type
         self.comment = comment
         self.course_id = course_id
+        staff = db.relationship('Staff', backref='data', lazy='dynamic')
 
     def insert(self):
         db.session.add(self)
@@ -152,6 +226,7 @@ class Data(db.Model):
     def format(self):
         return {
             'id': self.id,
+            'name': self.name,
             'short_description': self.short_description,
             'description': self.description,
             'link': self.link,
