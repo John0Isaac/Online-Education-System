@@ -36,9 +36,10 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 88%;
-  background-color:#dfe0df;
+  background-color:#484B91;
   margin-left: 6%;
   margin-top: 35px;
+  color:#fff;
 }
 
 td, th {
