@@ -1,7 +1,7 @@
 from flask import Flask, request, abort, jsonify
 from flask_cors import CORS
 
-from models import setup_db, Staff, Student
+from models import setup_db, Staff, Student, Courses
 
 def create_app(test_config=None):
     # Create and configure the app 
@@ -75,6 +75,34 @@ def create_app(test_config=None):
                 'job': staff.job,
                 'date_of_birth': staff.date_of_birth,
             }), 200
+
+
+    @app.route('/student/courses/<int:id>', methods=['GET'])
+    def retrive_student_courses(id):
+        try:
+            course = Student.courses.query.filter(Student.courses.student_id == id).all()
+            courses_details = Courses.query.filter(Courses.id == courses.courses_id).all()
+            return jsonify({
+                    'success': True,
+                    'courses_details': courses_details,
+                    'length_of_courses': courses_details.length()
+                }), 200
+        except:
+            abort(404)
+
+
+    @app.route('/staff/courses/<int:id>', methods=['GET'])
+    def retrive_staff_courses(id):
+        try:
+            course = Staff.courses.query.filter(Staff.courses.student_id == id).all()
+            courses_details = Courses.query.filter(Courses.id == courses.courses_id).all()
+            return jsonify({
+                    'success': True,
+                    'courses_details': courses_details,
+                    'length_of_courses': courses_details.length()
+                }), 200
+        except:
+            abort(404)
 
 
     @app.errorhandler(404)

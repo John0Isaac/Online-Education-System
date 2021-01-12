@@ -1,7 +1,6 @@
-from operator import add
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from flask_sqlalchemy import SQLAlchemy
-import psycopg2
+
 
 database_name = "online_education_system"
 database_path = "postgres://{}/{}".format('localhost:5432', database_name)
@@ -40,11 +39,11 @@ class Student(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     email = Column(String(120))
-    address = Column(String)
+    address = Column(String(500))
     phone = Column(String(120))
-    gender = Column(String)
-    date_of_birth = Column(String)
-    logincode = Column(String)
+    gender = Column(String(120))
+    date_of_birth = Column(String(120))
+    logincode = Column(String(120))
     specialization_id = Column(Integer, ForeignKey('specialization.id'), nullable=False)
     section_id = Column(Integer, ForeignKey('section.id'), nullable=False)
     courses = db.relationship( "Courses", secondary=student_courses, back_populates="student")
@@ -87,12 +86,12 @@ class Staff(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     email = Column(String(120))
-    address = Column(String)
+    address = Column(String(500))
     phone = Column(String(120))
-    gender = Column(String)
-    job = Column(String)
-    date_of_birth = Column(String)
-    logincode = Column(String)
+    gender = Column(String(120))
+    job = Column(String(120))
+    date_of_birth = Column(String(120))
+    logincode = Column(String(120))
     data_id = Column(Integer, ForeignKey('data.id'), nullable=False)
     courses = db.relationship( "Courses", secondary=staff_courses, back_populates="staff")
 
@@ -209,10 +208,11 @@ class Data(db.Model):
     name = Column(String)
     short_description = Column(String(120))
     description = Column(String)
-    link = Column(String(120))
-    type = Column(String)
-    comment = Column(String)
+    link = Column(String(500))
+    type = Column(String(120))
+    comment = Column(String(120))
     course_id = Column(Integer, ForeignKey('courses.id'), nullable=False)
+    staff = db.relationship('Staff', backref='data', lazy='dynamic')
 
     def __init__(self, name, short_description, description, link, type, comment, course_id):
         self.name = name
@@ -222,7 +222,7 @@ class Data(db.Model):
         self.type = type
         self.comment = comment
         self.course_id = course_id
-        staff = db.relationship('Staff', backref='data', lazy='dynamic')
+        
 
     def insert(self):
         db.session.add(self)
