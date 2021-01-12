@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="css/Main2.css">
+    <link rel="stylesheet" href="css/Framework.css">
+</head>
+<body>
+ <div class="container_grad">
+  <nav> 
+       <section class="container">
+         
+           <div class="nav_container">
+              <ul>
+                  <li><a href="#My_Profile">My Profile</a></li>
+                  <li><a href="#My_Courses">My Courses</a></li>
+                  <li><a href="#My_Grades">My Grades</a></li>
+              </ul>
+      </div>
+      </section>
+       </nav>
+      <main>
+             <div class="container">
+              <div class="profile_page" id="My_Profile">
+                  <div class="container">
+                          <h2>Your Information</h2>
+                    <table>
+                      <tr>
+                        <th>Name</th>
+                        <td>rana</td>
+                      </tr>
+                      <tr>
+                        <th>Id</th>
+                        <td>11111</td>
+                      </tr>
+                       <tr>
+                        <th>Phone</th>
+                        <td>011111</td>
+                      </tr>
+                       <tr>
+                        <th>Year</th>
+                        <td>3</td>
+                      </tr>
+                    </table>
+                  </div>
+               
+              </div>
+               
+<!--
+            
+              <div class="control-group">
+<br>
+
+<label class="control-label" for="inputPassword">Member Name</label>
+<div class="controls">
+************
+<br>
+</div>
+<br>
+<div class="control-group">
+<label class="control-label" for="inputEmail">Member ID : </label>
+<div class="controls">
+
+********
+</div>
+        </div>
+    </div>
+-->
+     </div>
+    </main>
+    </div>
+<br>
+
+<script>
+			jQuery(document).ready(function(){
+			jQuery("#change_password").submit(function(e){
+					e.preventDefault();
+						
+						var password = jQuery('#password').val();
+
+						var current_password = jQuery('#current_password').val();
+						var new_password = jQuery('#new_password').val();
+						var retype_password = jQuery('#retype_password').val();
+						if (password != current_password)
+						{
+						$.jGrowl("Password does not match with your current password  ", { header: 'Change Password Failed' });
+						}else if  (new_password != retype_password){
+						$.jGrowl("Password does not match with your new password  ", { header: 'Change Password Failed' });
+						}else if ((password == current_password) && (new_password == retype_password)){
+					var formData = jQuery(this).serialize();
+					$.ajax({
+						type: "POST",
+						url: "update_password_student.php",
+						data: formData,
+						success: function(html){
+					
+						$.jGrowl("Your Details is successfully updated", { header: 'Your Details is successfully updated' });
+						var delay = 2000;
+							setTimeout(function(){ window.location = 'change_password_student.php'  }, delay);
+						}
+					});
+                            
+					}
+				});
+			});
+   
+			</script>
+
+ </body>
+</html>
