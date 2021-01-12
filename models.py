@@ -92,10 +92,10 @@ class Staff(db.Model):
     job = Column(String(120))
     date_of_birth = Column(String(120))
     logincode = Column(String(120))
-    data_id = Column(Integer, ForeignKey('data.id'), nullable=False)
+    data = db.relationship('Data', backref='staff', lazy='dynamic')
     courses = db.relationship( "Courses", secondary=staff_courses, back_populates="staff")
 
-    def __init__(self, name, email, address, phone, gender, job, date_of_birth, logincode, data_id):
+    def __init__(self, name, email, address, phone, gender, job, date_of_birth, logincode):
         self.name = name
         self.email = email
         self.address = address
@@ -104,7 +104,6 @@ class Staff(db.Model):
         self.job = job
         self.date_of_birth = date_of_birth
         self.logincode = logincode
-        self.data_id = data_id
 
     def format(self):
         return {
@@ -116,8 +115,7 @@ class Staff(db.Model):
             'gender': self.gender,
             'job': self.job,
             'date_of_birth': self.date_of_birth,
-            'logincode': self.logincode,
-            'data': self.data_id
+            'logincode': self.logincode
         }
 
 
@@ -210,18 +208,17 @@ class Data(db.Model):
     description = Column(String)
     link = Column(String(500))
     type = Column(String(120))
-    comment = Column(String(120))
     course_id = Column(Integer, ForeignKey('courses.id'), nullable=False)
-    staff = db.relationship('Staff', backref='data', lazy='dynamic')
+    staff_id = Column(Integer, ForeignKey('staff.id'), nullable=False)
 
-    def __init__(self, name, short_description, description, link, type, comment, course_id):
+    def __init__(self, name, short_description, description, link, type, course_id, staff_id):
         self.name = name
         self.short_description = short_description
         self.description = description
         self.link = link
         self.type = type
-        self.comment = comment
         self.course_id = course_id
+        self.staff_id = staff_id
         
 
     def insert(self):
@@ -243,6 +240,6 @@ class Data(db.Model):
             'description': self.description,
             'link': self.link,
             'type': self.type,
-            'comment': self.comment,
-            'course_id': self.course_id
+            'course_id': self.course_id,
+            'staff_id': self.staff_id
         }

@@ -109,8 +109,32 @@ INSERT INTO section (name) VALUES
 ('5L4'), 
 ('5L5');
 
-INSERT INTO person (name, info, city, phone, website, facebook_link, seeking_job, industry_id) VALUES 
-('John Isaac', 'I like reading books a lot and i like going to the institue of arts to watch cute things', 'Cairo', '451-879-454','john0isaac.herokuapp.com', 'www.facebook.com/john0isaac', true, 3), 
-('Marie Curie', 'I like playing in my labrotory with chemical stuff to discover new things', 'Russia', '232-435-235', 'marie0curie.herokuapp.com', 'www.facebook.com/marie0curie', false, 2), 
-('Albert Einstein', 'I like the concept of time and that it is relative to other things can be different', 'America', '294-234-233', 'albert0einstein.herokuapp.com', 'www.facebook.com/albert0einstein', false, 1), 
-('James Charles', 'My mother used to say to me that one day i will be an amazing man', 'Ohio', '342-644-646', 'james0charles.herokuapp.com', 'www.facebook.com/james0charles', true, 4);
+INSERT INTO courses (name, code) VALUES
+('Information Systems', 'CMPN345' ),
+;
+
+INSERT INTO student (name, email, address, phone, gender, date_of_birth, logincode, specialization_id, section_id) VALUES 
+('John Isaac', 'johnisaac@gmail.com', 'Beni Suef', '+20 120 531 0694','Male', '2000-10-07', 'S0001',3, 20),
+;
+
+
+INSERT INTO staff (name, email, address, phone, gender, date_of_birth, logincode) VALUES 
+('Khaled Morsy', 'kahledmorsy@gmail.com', 'Menia', '+20 112 654 8495','Male', '1960-11-08','D0001'),
+;
+
+
+INSERT INTO student_courses(student_id, course_id) VALUES
+(1,2),
+(2,3),
+;
+
+
+INSERT INTO staff_courses(courses_id, staff_id) VALUES
+(1,2),
+(2,3),
+;
+
+
+INSERT INTO data (name, short_description, , description, link, type, course_id, staff_id) VALUES 
+('Chapter 1', 'This is a short introduction to Information Systems', 'Information Systems is responsible for a lot of things around us', '','document', 1, 1),
+;
