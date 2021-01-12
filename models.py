@@ -246,8 +246,3 @@ class Data(db.Model):
             'comment': self.comment,
             'course_id': self.course_id
         }
-
-association_table = Table('student_courses', db.Model.metadata,
-    Column('sudent_id', Integer, ForeignKey('student.id')),
-    Column('courses_id', Integer, ForeignKey('courses.id'))
-)
