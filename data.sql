@@ -99,35 +99,141 @@ INSERT INTO section (id, name) VALUES
 (89,'5V4'),
 (90,'5V5'),
 (91,'5A1'),
-
+(92,'5A2'),
+(93,'5A3'),
+(94,'5A4'),
+(95,'5A5'),
+(96,'5L1'), 
+(97,'5L2'),
+(98,'5L3'),
+(99,'5L4'), 
+(100,'5L5');
 
 INSERT INTO courses (id, name, code) VALUES
 (1, 'Information Systems', 'CMPN345' ),
-;
+(2, 'Engineering Computer Applications', 'CMPN210' ),
+(3, 'Microelectronic Circuits-1', 'ELCN212' ),
+(4, 'Mathematics -7', 'MTHN207' ),
+(5, 'Project Management', 'GENN341' ),
+(6, 'Electronic Measurements', 'ELCN214' ),
+(7, 'Seminar', 'CMPN261' ),
+(8, 'Building Technology', 'ARCN210' ),
+(9, 'Architectural Design 3', 'ARCN222' ),
+(10, 'Computer Applications 2', 'ARCN217' ),
+(11, 'Surveying', 'ARCN116' ),
+(12, 'Theory of Structures', 'ARCN117' ),
+(13, 'Engineering Graphics', 'MNFN002' ),
+(14, 'History of Engineering and Technology', 'GENN043' ),
+(15, 'Mechanics of materials', 'MNFN111' ),
+(16, 'Machine Design-1', 'MNFN222' ),
+(17, 'Radio and Television Engineering Systems', 'ELC524' ),
+(18, 'Civil Engineering Drawing', 'CIVN111' );
 
 INSERT INTO student (id, name, email, address, phone, gender, date_of_birth, logincode, specialization_id, section_id) VALUES 
 (1, 'John Isaac', 'johnisaac@gmail.com', 'Beni Suef', '+20 120 531 0694','Male', '2000-10-07', 'S0001', 3, 28),
-
-;
+(2, 'Eslam Mohamed', 'eslammicke32@gmail.com', 'Nasr City', '+20 102 330 5133','Male', '2000-04-26', 'S0002', 3, 28),
+(3, 'Mostafa Salama', 'moustafasalama035@gmail.com', 'Shibin Al Qanater', '+20 112 067 4671','Male', '2000-01-24', 'S0003', 3, 28),
+(4, 'Esraa Sherif', 'esraa.sherif15@gmail.com', 'El Nozha El Gadida', '+20 112 471 2703','Female', '2000-04-15', 'S0004', 3, 28),
+(5, 'Rana Ehab', 'ranaehab@gmail.com', 'El Maamora', '+20 115 449 4261','Female', '2000-09-01', 'S0005', 3, 28),
+(6, 'Amr Ashraf', 'amrashraf@gmail.com', 'Ain Shams', '+20 101 392 5363','Male', '2000-05-20', 'S0006', 4, 44),
+(7, 'Abdelrahman Ghareeb', 'abdelrahmanghareeb@gmail.com', 'El Matareya', '+20 123 123 1234','Male', '1998-12-10', 'S0007', 6, 31),
+(8, 'Mona Abdelmoniem', 'monaabdelmoniem@gmail.com', 'Imbaba', '+20 103 100 1000','Female', '2001-01-01', 'S0008', 4, 44),
+(9, 'Moustafa Shaban', 'moustafa--shaban@hotmail.com', 'Nasr City', '+20 106 540 6375','Male', '1997-01-16', 'S0009', 5, 92),
+(10, 'Mohamed Yassin', 'mohamedyassin@gmail.com', 'Nasr City', '+20 109 552 6329','Male', '2001-12-16', 'S0010', 7, 11),
+(11, 'Mariem Hesham', 'mariemhesham@gmail.com', 'Nasr City', '+20 111 222 3333','Female', '2001-07-10', 'S0011', 4, 17),
+(12, 'Aya Ehab', 'ayaehab@gmail.com', 'Suez City', '+20 177 220 3833','Female', '2000-11-02', 'S0012', 5, 47);
 
 
 INSERT INTO staff (id, name, email, address, phone, gender,job, date_of_birth, logincode) VALUES 
 (1, 'Khaled Morsy', 'kahledmorsy@gmail.com', 'Menia', '+20 112 654 8495','Male', 'Doctor', '1960-11-08','D0001'),
-;
+(2, 'Shoman Elshahat', 'shomanelshahat@gmail.com', 'Cairo', '+20 882 992 4442','Male', 'Doctor', '1960-11-09','D0002'),
+(3, 'Nasr Elkhateeb', 'nasrelkhateeb@gmail.com', 'Cairo', '+20 892 993 4142','Male', 'Doctor', '1975-11-09','D0003'),
+(4, 'Hadeer Kamal', 'hadeerkamal@gmail.com', 'Cairo', '+20 121 212 2121','Female', 'Teacher', '1990-11-09','T0001'),
+(5, 'Souad Nasser', 'souadnasser@gmail.com', 'Cairo', '+20 121 212 5412','Female', 'Teacher', '1990-12-09','T0002'),
+(6, 'Mohamed Elnabawy', 'mohamednabawy@gmail.com', 'Cairo', '+20 121 321 5412','Male', 'Teacher', '1985-09-05','T0003'),
+(7, 'Islam Ahmed', 'islamahmed@gmail.com', 'Cairo', '+20 133 341 5412','Male', 'Doctor', '1984-09-05','D0004'),
+(8, 'Seraj Aldiyn', 'serajeldiyn@gmail.com', 'Giza', '+20 135 351 5612','Male', 'Doctor', '1969-09-06','D0005'),
+(9, 'Mohamed Ahmed', 'mohamedahmed@gmail.com', 'Giza', '+20 134 346 5712','Male', 'IT', '1987-10-06','I0001'),
+(10, 'Samir Nader', 'samirnader@gmail.com', 'Cairo', '+20 124 666 5882','Male', 'IT', '1989-10-07','I0002');
 
 
 INSERT INTO student_courses(student_id, course_id) VALUES
 (1,1),
 (1,2),
-;
+(1,3),
+(1,4),
+(1,5),
+(1,6),
+(1,7),
+(2,1),
+(2,2),
+(2,3),
+(2,4),
+(2,5),
+(2,6),
+(2,7),
+(3,1),
+(3,2),
+(3,3),
+(3,4),
+(3,5),
+(3,6),
+(3,7),
+(4,1),
+(4,2),
+(4,3),
+(4,4),
+(4,5),
+(4,6),
+(4,7),
+(5,1),
+(5,2),
+(5,3),
+(5,4),
+(5,5),
+(5,6),
+(5,7),
+(6,8),
+(6,9),
+(6,10),
+(7,15),
+(7,16),
+(8,8),
+(8,9),
+(8,10),
+(9,17),
+(10,18),
+(11,11),
+(11,12),
+(12,1),
+(12,2),
+(12,3),
+(12,4),
+(12,5),
+(12,6),
+(12,7);
 
 
 INSERT INTO staff_courses(courses_id, staff_id) VALUES
 (1,1),
-(2,3),
-;
+(1,4),
+(1,5),
+(6,2),
+(6,6),
+(3,3),
+(3,6),
+(5,3),
+(8,7),
+(9,7),
+(10,7),
+(11,7),
+(12,7),
+(13,8),
+(15,8),
+(16,8);
 
 
 INSERT INTO data (id, name, short_description, , description, link, type, course_id, staff_id) VALUES 
 (1, 'Chapter 1', 'This is a short introduction to Information Systems', 'Information Systems is responsible for a lot of things around us', '','document', 1, 1),
-;
+(2, 'Chapter 4', 'WEEK-1 INTRODUCTION and CHAPTER 4', 'INTRODUCTION and Chapter 4 ', '','PDF', 6, 2),
+(3, 'Chapter 1', 'Lecture 1', 'OPERATIONAL AMPLIFIERS BASICS ', '','PDF', 3, 3);
