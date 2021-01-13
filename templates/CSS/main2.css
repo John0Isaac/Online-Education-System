@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    .upper .container {
+    display: flex;
+    justify-content: space-around;
+   padding: 12px 90px;
+}
+.upper .container .first ,
+.upper .container .second,
+.upper .container .third
+{
+    display: flex;
+}
+.upper .container .first svg,
+.upper .container .second svg,
+.upper .container .third svg
+{
+    margin-right: 15px;
+    color: #EE8515;
+    margin-top: 5px;
+}
+.sec-upper{
+    background-color: #EE8515;
+    text-align: center;
+    padding: 20px 0;
+}
+.sec-upper svg{
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+nav {
+    background-color: #000;
+}
+nav .container ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 22px 0;
+}
+nav .container ul li a{
+    text-decoration: none;
+}
+header .container .info{
+    display: flex;
+    padding: 50px 100px;
+    margin-top: 50px;
+    background-color: #F1A95B ;
+/*    color: #fff;*/
+}
+header .container .info ul li{
+    margin-bottom: 20px;
+    text-decoration: none;
+    list-style: none;
+}
+header .container .info .info-left{
+    margin-right: 30px;
+    color: #fff;
+}
+footer .container{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 55px;
+}
+footer .container svg{
+    font-size: 40px;
+}
+footer .container h4{
+    font-size: 20px;
+    margin-top: 10px;
+}
+@media (max-width:970px){
+    body .upper .container {
+        display: block;
+    }
+}
+@media (max-width:550px){
+ header .container .info{
+     padding: 50px 10px;
+    }
+    
+}
+

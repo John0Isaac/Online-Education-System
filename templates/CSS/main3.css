@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    .upper .container {
+    display: flex;
+    justify-content: space-around;
+   padding: 12px 90px;
+}
+.upper .container .first ,
+.upper .container .second,
+.upper .container .third
+{
+    display: flex;
+}
+.upper .container .first svg,
+.upper .container .second svg,
+.upper .container .third svg
+{
+    margin-right: 15px;
+    color: #EE8515;
+    margin-top: 5px;
+}
+.sec-upper{
+    background-color: #EE8515;
+    text-align: center;
+    padding: 20px 0;
+}
+.sec-upper svg{
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+nav {
+    background-color: #000;
+}
+nav .container ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 22px 0;
+}
+nav .container ul li a{
+    text-decoration: none;
+}
+main .container .all-courses-page {
+    background: #F1A95B ;
+    margin: 50px 0px;
+    padding: 50px 30px;
+    color: #583612 ;
+}
+main .container .all-courses-page h2{
+  font-size: 40px;
+}
+main .container .all-courses-page .courses .container ul li:first-child{
+    margin-top: 20px;
+}
+main .container .all-courses-page .courses .container ul li{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
