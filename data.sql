@@ -214,7 +214,7 @@ INSERT INTO student_courses(student_id, course_id) VALUES
 (12,7);
 
 
-INSERT INTO staff_courses(courses_id, staff_id) VALUES
+INSERT INTO staff_courses(course_id, staff_id) VALUES
 (1,1),
 (1,4),
 (1,5),
@@ -233,7 +233,7 @@ INSERT INTO staff_courses(courses_id, staff_id) VALUES
 (16,8);
 
 
-INSERT INTO data (id, name, short_description, , description, link, type, course_id, staff_id) VALUES 
+INSERT INTO data (id, name, short_description , description, link, type, course_id, staff_id) VALUES 
 (1, 'Chapter 1', 'This is a short introduction to Information Systems', 'Information Systems is responsible for a lot of things around us', '','document', 1, 1),
 (2, 'Chapter 4', 'WEEK-1 INTRODUCTION and CHAPTER 4', 'INTRODUCTION and Chapter 4 ', '','PDF', 6, 2),
 (3, 'Chapter 1', 'Lecture 1', 'OPERATIONAL AMPLIFIERS BASICS ', '','PDF', 3, 3);

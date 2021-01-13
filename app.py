@@ -1,7 +1,7 @@
 from flask import Flask, request, abort, jsonify
 from flask_cors import CORS
 
-from models import setup_db, Staff, Student, Courses
+from models import setup_db, Staff, Student, Courses, student_courses, staff_courses
 
 def create_app(test_config=None):
     # Create and configure the app 
@@ -13,12 +13,14 @@ def create_app(test_config=None):
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization,true')
-        response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH,OPTIONS')
+        response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
         return response
     
-    @app.route('/')
-    def landing_page():
-        return "Hello"
+    @app.route('/<int:id>')
+    def landing_page(id):
+        courses = Student.query(Student.courses).filter(student_courses.student_id == id).one()
+        courses_details = Courses.query.filter(Courses.id == courses.course_id).one()
+        return str(courses_details)
 
     @app.route('/login', methods=['POST'])
     def login():
@@ -26,10 +28,10 @@ def create_app(test_config=None):
         logincode = body.get('logincode', None)
         try:
             if logincode[0] == 'I' or logincode[0] == 'D' or logincode[0] == 'T':
-                staff = Staff.query.filter(Staff.logincode == logincode).all()
+                staff = Staff.query.filter(Staff.logincode == logincode).one()
                 identifier = staff.id
             elif logincode[0] == 'S':
-                student = Student.query.filter(Student.logincode == logincode).all()
+                student = Student.query.filter(Student.logincode == logincode).one()
                 identifier = student.id
             else:
                 abort(401)
@@ -80,8 +82,8 @@ def create_app(test_config=None):
     @app.route('/student/courses/<int:id>', methods=['GET'])
     def retrive_student_courses(id):
         try:
-            course = Student.courses.query.filter(Student.courses.student_id == id).all()
-            courses_details = Courses.query.filter(Courses.id == courses.courses_id).all()
+            courses = Student.courses.query.filter(Student.courses.student_id == id).one()
+            courses_details = Courses.query.filter(Courses.id == courses.course_id).one()
             return jsonify({
                     'success': True,
                     'courses_details': courses_details,
@@ -106,7 +108,7 @@ def create_app(test_config=None):
 
 
     @app.route('/course/view/<int:id>', methods=['GET'])
-    def retrive_staff_courses(id):
+    def retrive_course(id):
         try:
             course = Staff.courses.query.filter(Staff.courses.student_id == id).all()
             courses_details = Courses.query.filter(Courses.id == courses.courses_id).all()
@@ -120,7 +122,7 @@ def create_app(test_config=None):
 
 
     @app.route('/course/view/<int:id>', methods=['POST'])
-    def retrive_staff_courses(id):
+    def edit_course_content(id):
         try:
             course = Staff.courses.query.filter(Staff.courses.student_id == id).all()
             courses_details = Courses.query.filter(Courses.id == courses.courses_id).all()

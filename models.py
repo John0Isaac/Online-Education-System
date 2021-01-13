@@ -20,10 +20,10 @@ def setup_db(app, database_path=database_path):
 
 student_courses = Table('student_courses', db.Model.metadata,
     Column('student_id', Integer, ForeignKey('student.id')),
-    Column('courses_id', Integer, ForeignKey('courses.id'))
+    Column('course_id', Integer, ForeignKey('courses.id'))
 )
 staff_courses = Table('staff_courses', db.Model.metadata,
-    Column('courses_id', Integer, ForeignKey('courses.id')),
+    Column('course_id', Integer, ForeignKey('courses.id')),
     Column('staff_id', Integer, ForeignKey('staff.id'))
 )
 
@@ -46,7 +46,7 @@ class Student(db.Model):
     logincode = Column(String(120))
     specialization_id = Column(Integer, ForeignKey('specialization.id'), nullable=False)
     section_id = Column(Integer, ForeignKey('section.id'), nullable=False)
-    courses = db.relationship( "Courses", secondary=student_courses, back_populates="student")
+    courses = db.relationship( "Courses", secondary=student_courses, back_populates="students")
 
     def __init__(self, name, email, address, phone, gender, date_of_birth, logincode, specialization_id, section_id):
         self.name = name
@@ -157,16 +157,16 @@ class Section(db.Model):
     ___tablename__ = 'section'
 
     id = Column(Integer, primary_key=True)
-    number = Column(String)
+    name = Column(String)
     Student = db.relationship('Student', backref='section', lazy='dynamic')
 
-    def __init__(self, number):
-        self.number = number
+    def __init__(self, name):
+        self.name = name
 
     def format(self):
         return {
             'id': self.id,
-            'number': self.name
+            'name': self.name
         }
 
 
