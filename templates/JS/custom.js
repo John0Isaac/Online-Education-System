@@ -15,3 +15,28 @@ $("input:checkbox").on('click', function() {
     $box.prop("checked", false);
   }
 });
+
+const descInput = document.getElementById('description');
+      document.getElementById('form').onsubmit = function(e) {
+        e.preventDefault();
+        const desc = descInput.value;
+        descInput.value = '';
+        fetch('/todos/create', {
+          method: 'POST',
+          body: JSON.stringify({
+            'description': desc,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+        .then(response => response.json())
+        .then(jsonResponse => {
+          const li = document.createElement('li');
+          const checkbox = document.createElement('input');
+          checkbox.className = 'check-completed';
+          checkbox.type = 'checkbox';
+          checkbox.setAttribute('data-id', jsonResponse.id);
+          li.appendChild(checkbox);
+        })
+      }
