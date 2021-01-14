@@ -91,20 +91,6 @@ def create_app(test_config=None):
             abort(404)
 
 
-    @app.route('/staff/courses/<int:id>', methods=['GET'])
-    def retrive_staff_courses(id):
-        try:
-            course = Staff.courses.query.filter(Staff.courses.student_id == id).all()
-            courses_details = Courses.query.filter(Courses.id == courses.courses_id).all()
-            return jsonify({
-                    'success': True,
-                    'courses_details': courses_details,
-                    'length_of_courses': courses_details.length()
-                }), 200
-        except:
-            abort(404)
-
-
     @app.route('/staff/course/view/<int:id>', methods=['GET'])
     def retrive_course_staff(id):
         try:
