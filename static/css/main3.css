@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    .upper .container {
+    display: flex;
+    justify-content: space-around;
+   padding: 12px 90px;
+}
+.upper .container .first ,
+.upper .container .second,
+.upper .container .third
+{
+    display: flex;
+}
+.upper .container .first svg,
+.upper .container .second svg,
+.upper .container .third svg
+{
+    margin-right: 15px;
+    color: #EE8515;
+    margin-top: 5px;
+}
+.sec-upper{
+    background-color: #EE8515;
+    text-align: center;
+    padding: 20px 0;
+}
+.sec-upper svg{
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+nav {
+    background-color: #000;
+}
+nav .container ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 22px 0;
+}
+nav .container ul li a{
+    text-decoration: none;
+}
+main .container .all-courses-page {
+    background: #F1A95B ;
+    border: 2px solid #F1A95B ;
+    border-radius: 50px;
+    margin: 50px 0px;
+    padding: 27px 30px;
+    color: #583612 ;
+}
+main .container .all-courses-page h2{
+  font-size: 40px;
+}
+main .container .all-courses-page .courses .container ul li:first-child{
+    margin-top: 20px;
+}
+main .container .all-courses-page .courses .container ul li{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.all-cards .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  border-radius: 5px;
+    margin-left: 20px;
+    margin-bottom: 100px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  padding: 2px 16px;
+}
+.all-cards{
+    display:flex;
+    justify-content: space-between;
+}
+.all-cards .card h4{
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+/*
+main .container .courses .container .first-line img{
+    width: 50%;
+}
+*/

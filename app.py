@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort, jsonify, render_template
 from flask_cors import CORS
 
 from models import setup_db, Staff, Student, Courses, Data, student_courses
@@ -16,11 +16,9 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
         return response
     
-    @app.route('/<int:id>')
-    def landing_page(id):
-        courses_id = Courses.join(student_courses).join(Student).filter(student_courses.c.student_id == id).all()
-        courses = Courses.query.filter(Courses.id == courses_id).all()
-        return str(courses.format())
+    @app.route('/')
+    def landing_page():
+        return render_template('pages/index.html')
 
     @app.route('/login', methods=['POST'])
     def login():
