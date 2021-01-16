@@ -16,6 +16,11 @@ $("input:checkbox").on('click', function() {
   }
 });
 
+
+// Get Data, time to display it
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleString();
+
 const descInput = document.getElementById('description');
       document.getElementById('form').onsubmit = function(e) {
         e.preventDefault();

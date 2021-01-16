@@ -91,8 +91,22 @@ def create_app(test_config=None):
             abort(404)
 
 
+    @app.route('/staff/courses/<int:id>', methods=['GET'])
+    def retrive_staff_courses(id):
+        try:
+            courses_id = student_courses.query.filter(student_courses.student_id == id).all()
+            courses = Courses.query.filter(Courses.id == courses_id).all()
+            return jsonify({
+                    'success': True,
+                    'courses_details': courses.format(),
+                    'length_of_courses': courses.length()
+                }), 200
+        except:
+            abort(404)
+
+
     @app.route('/staff/course/view/<int:id>', methods=['GET'])
-    def retrive_course_staff(id):
+    def retrive_staff_course(id):
         try:
             selection = Data.query.filter(Data.staff_id == id).all()
             content = [result.format() for result in selection]
@@ -106,7 +120,7 @@ def create_app(test_config=None):
 
 
     @app.route('/student/course/view/<int:id>', methods=['GET'])
-    def retrive_course_student(id):
+    def retrive_student_course(id):
         try:
             selection = Data.query.filter(Data.course_id == id).all()
             content = [result.format() for result in selection]
