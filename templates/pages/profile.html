@@ -1,82 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/all.min.css">
-    <link rel="stylesheet" href="/static/css/main2.css">
-    <link rel="stylesheet" href="/static/css/Framework.css">
-</head>
-<body>
-     <div class="upper">
-       <div class="container">
-           <div class="first">
-            <i class="far fa-envelope"></i>
-            <p>ranaagha50@gmail.com</p>
-        </div>
-        <div class="second">
-            <i class="far fa-clock"></i>
-            <p>sun-thu 7:00-19:00</p>
-        </div>
-        <div class="third">
-            <i class="fas fa-phone-alt"></i>
-            <p>02-27294523</p>
-        </div>
-    </div>
-       </div>
-        <div class="sec-upper">
-              <i class="fas fa-user-graduate"></i>
-           <h3 class="white-txt upper-txt center-txt"> Online Education System</h3>
-           <p class="white-txt">Modern Academy for Engineering and technology.</p>
-           </div>
-        <nav>
-           <div class="container">
-               <ul>
-                        <li><a href="#profile" class="white-txt">My Profile</a></li>
-                        <li class="down-btn"><a href="/templates/pages/corses.html#" class="white-txt">courses</a></li>
-                   <li class="down-btn"><a href="/templates/pages/index.html#about" class="white-txt">About</a></li>
-                    </ul> 
-           </div>
-       </nav>
-       <header> 
-           <section class="container">
-               <section class="info" id="profile">
-                   <section class="info-left">
-                       <ul>
-                           <li>Name:</li>
-                           <li>Email:</li>
-                           <li>Address:</li>
-                           <li>Phone:</li>
-                           <li>Gender:</li>
-                           <li>Date of birth:</li>
-                       </ul>
-                   </section>
-                   <section class="info-right">
-                       <ul>
-                           <li>Rana Agha</li>
-                           <li>ranaagha50@gmail.com</li>
-                           <li>9,Mostafa Kamel, Alexandria</li>
-                           <li>01144678180</li>
-                           <li>Female</li>
-                           <li>1/9/2000</li>
-                           
-                       </ul>
-                   </section>
-               </section>
-           </section>
-       </header>
-         <footer>
-           <div class="container">
-               <i class="fas fa-university orange-txt"></i>
-               <h4>Modern Academy</h4>
-               <p>For Engineering and Technology</p>
-           </div>
-       </footer>
-
-
-
-
-<script src="/static/js/all.min.js"></script>
-</body>
-</html>
+{% extends 'layouts/logedin.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<header> 
+  <section class="container">
+    <section class="info" id="profile">
+      <section class="info-left">
+        <ul>
+          <li>Name:</li>
+          <li>Email:</li>
+          <li>Address:</li>
+          <li>Phone:</li>
+          <li>Gender:</li>
+          <li>Date of birth:</li>
+        </ul>
+      </section>
+      <section class="info-right">
+        <ul>
+          <li>Rana Agha</li>
+          <li>ranaagha50@gmail.com</li>
+          <li>9,Mostafa Kamel, Alexandria</li>
+          <li>01144678180</li>
+          <li>Female</li>
+          <li>1/9/2000</li>      
+        </ul>
+      </section>
+    </section>
+  </section>
+</header>
+{% endblock %}

@@ -12,10 +12,10 @@ psql online_education_system < data.sql
 ## Endpoints
 
 * Sample:
-`curl http://127.0.0.1:5000/`
+`curl https://online-education-system.herokuapp.com/`
 
 * Sample:
-`curl http://127.0.0.1:5000/login -X POST -H "Content-Type:application/json" -d '{"logincode": "D0001"}'`
+`curl https://online-education-system.herokuapp.com/login -X POST -H "Content-Type:application/json" -d '{"logincode": "D0001"}'`
 
 ```JSON
 {
@@ -25,7 +25,7 @@ psql online_education_system < data.sql
 ```
 
 * Sample:
-`curl http://127.0.0.1:5000/student/profile/1`
+`curl https://online-education-system.herokuapp.com/student/profile/1`
 
 ```JSON
 {
@@ -41,7 +41,7 @@ psql online_education_system < data.sql
 ```
 
 *Sample:
-`curl http://127.0.0.1:5000/staff/profile/1`
+`curl https://online-education-system.herokuapp.com/staff/profile/1`
 
 ```JSON
 {
