@@ -29,7 +29,7 @@
       </div>
       <div class="second">
         <i class="far fa-clock"></i>
-        <p>sun-thu 7:00-19:00</p>
+        <p><span id="datetime"></span></p>
       </div>
       <div class="third">
         <i class="fas fa-phone-alt"></i>
@@ -42,18 +42,33 @@
     <h3 class="white-txt upper-txt center-txt"> Online Education System</h3>
     <p class="white-txt">Modern Academy for Engineering and technology.</p>
   </div>
-  <nav>
-    <div class="container">
-      <ul>
-        <li><a href="/templates/pages/profile.html" class="white-txt">My Profile</a></li>
-        <li class="down-btn"><a href="#" class="white-txt">courses</a></li>
-        <li class="down-btn"><a href="/templates/pages/index.html#about" class="white-txt">About</a></li>
-      </ul> 
-    </div>
-  </nav>
 
   {% block content %}{% endblock %}
 
+  <section class="about" id="about">
+    <div class="container">
+      <h2>About</h2>
+      <div class="content">
+        <div class="content-left">
+          <h3 class="font-resize">Departments</h3>
+          <ul>
+            <li>Basic Science</li>
+            <li>Computer Engineering</li>
+            <li>Information Technology</li>
+            <li>Electronic Engineering</li>
+            <li>Communication Technology</li>
+            <li>Manufacturing Engineering</li>
+            <li>Production Technologyg</li>
+            <li>Architectural Engineering & Building Technology</li>
+            <li>Civil Engineerin</li>
+          </ul>
+        </div>
+        <div class="content-right">
+          <i class="fas fa-university orange-txt"></i>
+        </div>
+      </div>
+    </div>
+  </section>
   <footer>
     <div class="container">
       <i class="fas fa-university orange-txt"></i>

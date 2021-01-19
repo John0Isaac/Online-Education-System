@@ -1,33 +1,32 @@
 {% extends '/layouts/logedin.html' %}
 {% block title %}Courses{% endblock %}
 {% block content %}
+<nav>
+  <div class="container">
+    <ul>
+      <li><a href="/student/profile/{{ data.id }}" class="white-txt">My Profile</a></li>
+      <li class="down-btn"><a href="/student/courses/{{ data.id }}" class="white-txt">Courses</a></li>
+      <li class="down-btn"><a href="#about" class="white-txt">About</a></li>
+    </ul> 
+  </div>
+</nav>
 <main> 
   <div class="container">
     <div class="all-courses-page">
       <h2>Your Courses</h2>
     </div>
     <div class="all-cards">
+      {% for d in data.courses_details %}
       <div class="card">
-        <img src="/static/img/Card1.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-          <h4><a href="/templates/pages/Math.html">Math7</a></h4> 
-          <p>MTHN207</p> 
-        </div>
+        <a href="/view/course/{{ d.id }}">
+          <div class="container">
+            <h4>{{ d.name }}</h4> 
+            <p>{{ d.code }}</p>
+            <br>
+          </div>
+        </a>
       </div>
-      <div class="card">
-        <img src="/static/img/card2.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-          <h4><a href="#">Microelectronic Circuits-1</a></h4> 
-          <p>ELCN212</p> 
-        </div>
-      </div>
-      <div class="card">
-        <img src="/static/img/card3.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-          <h4><a href="#">Electronic Measurements.</a></h4> 
-          <p>ELCN214</p> 
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </main>

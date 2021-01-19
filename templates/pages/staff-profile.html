@@ -1,6 +1,15 @@
 {% extends 'layouts/logedin.html' %}
 {% block title %}Profile{% endblock %}
 {% block content %}
+<nav>
+  <div class="container">
+    <ul>
+      <li><a href="/staff/profile/{{ staff_data.id }}" class="white-txt">My Profile</a></li>
+      <li class="down-btn"><a href="/staff/courses/{{ staff_data.id }}" class="white-txt">Courses</a></li>
+      <li class="down-btn"><a href="#about" class="white-txt">About</a></li>
+    </ul> 
+  </div>
+</nav>
 <header> 
   <section class="container">
     <section class="info" id="profile">
@@ -12,16 +21,18 @@
           <li>Phone:</li>
           <li>Gender:</li>
           <li>Date of birth:</li>
+          <li>Job Title:</li>
         </ul>
       </section>
       <section class="info-right">
         <ul>
-          <li>Rana Agha</li>
-          <li>ranaagha50@gmail.com</li>
-          <li>9,Mostafa Kamel, Alexandria</li>
-          <li>01144678180</li>
-          <li>Female</li>
-          <li>1/9/2000</li>      
+          <li>{{ staff_data.name }}</li>
+          <li>{{ staff_data.email }}</li>
+          <li>{{ staff_data.address }}</li>
+          <li>{{ staff_data.phone }}</li>
+          <li>{{ staff_data.gender }}</li>
+          <li>{{ staff_data.date_of_birth }}</li>
+          <li>{{ staff_data.job }}</li>
         </ul>
       </section>
     </section>

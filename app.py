@@ -23,23 +23,38 @@ def create_app(test_config=None):
 
     @app.route('/login', methods=['POST'])
     def login():
-        body = request.get_json()
-        logincode = body.get('logincode', None)
+        logincode = request.form.get('logincode', None)
         try:
             if logincode[0] == 'I' or logincode[0] == 'D' or logincode[0] == 'T':
                 staff = Staff.query.filter(Staff.logincode == logincode).one()
-                identifier = staff.id
+                return render_template('pages/staff-profile.html',staff_data = {
+                    'success': True,
+                    'id': staff.id,
+                    'name': staff.name,
+                    'email': staff.email,
+                    'address': staff.address,
+                    'phone': staff.phone,
+                    'gender': staff.gender,
+                    'date_of_birth': staff.date_of_birth,
+                    'job': staff.job,
+                })
             elif logincode[0] == 'S':
                 student = Student.query.filter(Student.logincode == logincode).one()
-                identifier = student.id
+                return render_template('pages/student-profile.html',student_data ={
+                    'success': True,
+                    'id': student.id,
+                    'name': student.name,
+                    'email': student.email,
+                    'address': student.address,
+                    'phone': student.phone,
+                    'gender': student.gender,
+                    'date_of_birth': student.date_of_birth,
+                })
             else:
                 abort(401)
-            return jsonify({
-                'success': True,
-                'id': identifier
-            }), 200
         except:
             abort(404)
+
 
     @app.route('/student/profile/<int:id>', methods=['GET'])
     def retrive_student(id):
@@ -47,7 +62,7 @@ def create_app(test_config=None):
         if not student:
             abort(404)
 
-        return jsonify({
+        return render_template('pages/student-profile.html',student_data ={
                 'success': True,
                 'id': student.id,
                 'name': student.name,
@@ -56,7 +71,7 @@ def create_app(test_config=None):
                 'phone': student.phone,
                 'gender': student.gender,
                 'date_of_birth': student.date_of_birth,
-            }), 200
+            })
 
 
     @app.route('/staff/profile/<int:id>', methods=['GET'])
@@ -65,17 +80,17 @@ def create_app(test_config=None):
         if not staff:
             abort(404)
 
-        return jsonify({
-                'success': True,
-                'id': staff.id,
-                'name': staff.name,
-                'email': staff.email,
-                'address': staff.address,
-                'phone': staff.phone,
-                'gender': staff.gender,
-                'job': staff.job,
-                'date_of_birth': staff.date_of_birth,
-            }), 200
+        return render_template('pages/staff-profile.html',staff_data = {
+                    'success': True,
+                    'id': staff.id,
+                    'name': staff.name,
+                    'email': staff.email,
+                    'address': staff.address,
+                    'phone': staff.phone,
+                    'gender': staff.gender,
+                    'date_of_birth': staff.date_of_birth,
+                    'job': staff.job,
+                })
 
 
     @app.route('/student/courses/<int:id>', methods=['GET'])
@@ -86,11 +101,12 @@ def create_app(test_config=None):
             for element in course_id:
                 course = Courses.query.get(element[0])
                 courses.append(course.format())
-            return jsonify({
+            return render_template('pages/student-courses.html',data = {
+                    'id': id,
                     'success': True,
                     'courses_details': courses,
                     'length_of_courses': len(courses)
-                }), 200
+                })
         except:
             abort(404)
 
