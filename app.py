@@ -119,11 +119,12 @@ def create_app(test_config=None):
             for element in course_id:
                 course = Courses.query.get(element[0])
                 courses.append(course.format())
-            return jsonify({
+            return render_template('pages/staff-courses.html',data = {
+                    'id': id,
                     'success': True,
                     'courses_details': courses,
                     'length_of_courses': len(courses)
-                }), 200
+                })
         except:
             abort(404)
 
