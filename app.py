@@ -1,7 +1,8 @@
 from flask import Flask, request, abort, jsonify, render_template
 from flask_cors import CORS
+from sqlalchemy import select
 
-from models import setup_db, Staff, Student, Courses, Data, student_courses
+from models import setup_db, Staff, Student, Courses, Data, student_courses, staff_courses, db
 
 def create_app(test_config=None):
     # Create and configure the app 
@@ -79,13 +80,16 @@ def create_app(test_config=None):
 
     @app.route('/student/courses/<int:id>', methods=['GET'])
     def retrive_student_courses(id):
+        courses = []
         try:
-            courses_id = student_courses.query.filter(student_courses.student_id == id).all()
-            courses = Courses.query.filter(Courses.id == courses_id).all()
+            course_id = db.session.execute(select([student_courses.c.course_id]).where(student_courses.c.student_id == id)).fetchall()
+            for element in course_id:
+                course = Courses.query.get(element[0])
+                courses.append(course.format())
             return jsonify({
                     'success': True,
-                    'courses_details': courses.format(),
-                    'length_of_courses': courses.length()
+                    'courses_details': courses,
+                    'length_of_courses': len(courses)
                 }), 200
         except:
             abort(404)
@@ -93,44 +97,62 @@ def create_app(test_config=None):
 
     @app.route('/staff/courses/<int:id>', methods=['GET'])
     def retrive_staff_courses(id):
+        courses = []
         try:
-            courses_id = student_courses.query.filter(student_courses.student_id == id).all()
-            courses = Courses.query.filter(Courses.id == courses_id).all()
+            course_id = db.session.execute(select([staff_courses.c.course_id]).where(staff_courses.c.staff_id == id)).fetchall()
+            for element in course_id:
+                course = Courses.query.get(element[0])
+                courses.append(course.format())
             return jsonify({
                     'success': True,
-                    'courses_details': courses.format(),
-                    'length_of_courses': courses.length()
+                    'courses_details': courses,
+                    'length_of_courses': len(courses)
                 }), 200
         except:
             abort(404)
 
 
-    @app.route('/staff/course/view/<int:id>', methods=['GET'])
-    def retrive_staff_course(id):
-        try:
-            selection = Data.query.filter(Data.staff_id == id).all()
-            content = [result.format() for result in selection]
-            return jsonify({
-                    'success': True,
-                    'course_content': content,
-                    'length_of_courses': content.length()
-                }), 200
-        except:
-            abort(404)
-
-
-    @app.route('/student/course/view/<int:id>', methods=['GET'])
-    def retrive_student_course(id):
+    @app.route('/view/course/<int:id>', methods=['GET'])
+    def retrive_course_content(id):
         try:
             selection = Data.query.filter(Data.course_id == id).all()
             content = [result.format() for result in selection]
             return jsonify({
                     'success': True,
                     'course_content': content,
-                    'length_of_courses': content.length()
+                    'length_of_content': len(content)
                 }), 200
         except:
             abort(404)
+
+
+    @app.route('/view/course/<int:id>', methods=['POST'])
+    def add_course_content(id):
+        try:
+            selection = Data.query.filter(Data.course_id == id).all()
+            content = [result.format() for result in selection]
+            return jsonify({
+                    'success': True,
+                    'course_content': content,
+                    'length_of_content': len(content)
+                }), 200
+        except:
+            abort(404)
+
+
+    @app.route('/view/course/<int:id>', methods=['DELETE'])
+    def delete_course_content(id):
+        try:
+            selection = Data.query.filter(Data.course_id == id).all()
+            content = [result.format() for result in selection]
+            return jsonify({
+                    'success': True,
+                    'course_content': content,
+                    'length_of_content': len(content)
+                }), 200
+        except:
+            abort(404)
+
 
     @app.errorhandler(404)
     def not_found(error):
