@@ -37,7 +37,7 @@ def create_app(test_config=None):
                     'gender': staff.gender,
                     'date_of_birth': staff.date_of_birth,
                     'job': staff.job,
-                })
+                }),200
             elif logincode[0] == 'S':
                 student = Student.query.filter(Student.logincode == logincode).one()
                 return render_template('pages/student-profile.html',student_data ={
@@ -49,7 +49,7 @@ def create_app(test_config=None):
                     'phone': student.phone,
                     'gender': student.gender,
                     'date_of_birth': student.date_of_birth,
-                })
+                }),200
             else:
                 abort(401)
         except:
@@ -71,7 +71,7 @@ def create_app(test_config=None):
                 'phone': student.phone,
                 'gender': student.gender,
                 'date_of_birth': student.date_of_birth,
-            })
+            }),200
 
 
     @app.route('/staff/profile/<int:id>', methods=['GET'])
@@ -90,7 +90,7 @@ def create_app(test_config=None):
                     'gender': staff.gender,
                     'date_of_birth': staff.date_of_birth,
                     'job': staff.job,
-                })
+                }),200
 
 
     @app.route('/student/courses/<int:id>', methods=['GET'])
@@ -106,7 +106,7 @@ def create_app(test_config=None):
                     'success': True,
                     'courses_details': courses,
                     'length_of_courses': len(courses)
-                })
+                }),200
         except:
             abort(404)
 
@@ -124,17 +124,21 @@ def create_app(test_config=None):
                     'success': True,
                     'courses_details': courses,
                     'length_of_courses': len(courses)
-                })
+                }),200
         except:
             abort(404)
 
 
-    @app.route('/view/course/<int:id>', methods=['GET'])
-    def retrive_course_content(id):
+    @app.route('/view/staff/course/<int:cid>/<int:id>', methods=['GET'])
+    def retrive_staff_course_content(cid,id):
         try:
-            selection = Data.query.filter(Data.course_id == id).all()
+            selection = Data.query.filter(Data.course_id == cid).all()
             content = [result.format() for result in selection]
-            return jsonify({
+            course = Courses.query.get(cid).format()
+            name = course['name']
+            return render_template('pages/staff-course.html',data={
+                    'id': id,
+                    'name': name,
                     'success': True,
                     'course_content': content,
                     'length_of_content': len(content)
@@ -143,26 +147,16 @@ def create_app(test_config=None):
             abort(404)
 
 
-    @app.route('/view/course/<int:id>', methods=['POST'])
-    def add_course_content(id):
+    @app.route('/view/student/course/<int:cid>/<int:id>', methods=['GET'])
+    def retrive_student_course_content(cid,id):
         try:
-            selection = Data.query.filter(Data.course_id == id).all()
+            selection = Data.query.filter(Data.course_id == cid).all()
             content = [result.format() for result in selection]
-            return jsonify({
-                    'success': True,
-                    'course_content': content,
-                    'length_of_content': len(content)
-                }), 200
-        except:
-            abort(404)
-
-
-    @app.route('/view/course/<int:id>', methods=['DELETE'])
-    def delete_course_content(id):
-        try:
-            selection = Data.query.filter(Data.course_id == id).all()
-            content = [result.format() for result in selection]
-            return jsonify({
+            course = Courses.query.get(cid).format()
+            name = course['name']
+            return render_template('pages/student-course.html',data={
+                    'id': id,
+                    'name': name,
                     'success': True,
                     'course_content': content,
                     'length_of_content': len(content)

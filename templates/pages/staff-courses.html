@@ -18,7 +18,7 @@
     <div class="all-cards">
       {% for d in data.courses_details %}
       <div class="card">
-        <a href="/view/course/{{ d.id }}">
+        <a href="/view/staff/course/{{ d.id }}/{{ data.id }}">
           <div class="container">
             <h4>{{ d.name }}</h4> 
             <p>{{ d.code }}</p>

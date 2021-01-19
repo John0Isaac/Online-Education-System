@@ -2,68 +2,45 @@
 {% block title %}Course{% endblock %}
 {% block content %}
 <nav>
-   <div class="container">
-     <ul>
-       <li><a href="/templates/pages/profile.html" class="white-txt">My Profile</a></li>
-       <li class="down-btn"><a href="#" class="white-txt">Courses</a></li>
-       <li class="down-btn"><a href="#about" class="white-txt">About</a></li>
-     </ul> 
-   </div>
- </nav>
+  <div class="container">
+    <ul>
+      <li><a href="/student/profile/{{ data.id }}" class="white-txt">My Profile</a></li>
+      <li class="down-btn"><a href="/student/courses/{{ data.id }}" class="white-txt">Courses</a></li>
+      <li class="down-btn"><a href="#about" class="white-txt">About</a></li>
+    </ul> 
+  </div>
+</nav>
 <header> 
   <div class="container">
     <div class="all-courses-page">
-       <h3>Math7</h3>
-        <div class="addition">
-           <i class="fas fa-plus-circle"></i>
-       </div>
+      <h3>{{ data.name }}</h3>
     </div>
     <div class="lectures">
-       <div class="container">
-          <ul>
-             <div class="list-icon">
-                <span class="hidden sectionname">24 October - 30 October</span>
-                <i class="far fa-times-circle" class="red-txt"></i>
-              </div>
-             <li class="activity resource modtype_resource " id="module-7283">
-                 <div>
-                   <div class="mod-indent-outer">
-                      <div class="mod-indent">
-                      </div>
-                      <div>
-                          <div class="activityinstance">
-                            <a class="" onclick="" href="https://eng.synceg.net/mod/resource/view.php?id=7283">
-                               <img src="https://eng.synceg.net/theme/image.php/classic/core/1610567578/f/pdf-24" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true">
-                                <span class="instancename">Lecture1_Week2<span class="accesshide "> File</span></span>
-                             </a>
-                         </div>
-                      </div>
-                   </div>
+      <div class="container">
+        <ul>
+          {% for d in data.course_content %}
+          <div class="list-icon">
+            <span class="hidden sectionname">{{ d.name }}</span>
+          </div>
+          <li class="activity resource modtype_resource " id="module-7283">
+            <div>
+              <div class="mod-indent-outer">
+                <div class="mod-indent">
                 </div>
-             </li>  
-             <div class="list-icon">
-                <span class="hidden sectionname">7 November - 13 November</span>
-                 <i class="far fa-times-circle" class="red-txt"></i>
-              </div>
-              <li class="activity resource modtype_resource " id="module-9734">
                 <div>
-                    <div class="mod-indent-outer">
-                       <div class="mod-indent">
-                       </div>
-                       <div>
-                          <div class="activityinstance">
-                             <a class="" onclick="" href="https://eng.synceg.net/mod/resource/view.php?id=9734">
-                                <img src="https://eng.synceg.net/theme/image.php/classic/core/1610567578/f/pdf-24" class="iconlarge activityicon" alt="" role="presentation" aria-hidden="true">
-                                <span class="instancename">محاضرة الاسبوع 15/11/2020<span class="accesshide "> File</span></span>
-                            </a>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </li>
-           </ul>
-        </div>
-     </div>             
- </div>
+                  <div class="activityinstance">
+                    <a class="" onclick="" href="{{ d.link }}">
+                      <span class="instancename">{{ d.short_description }}<span class="accesshide "> File</span></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>         
+  </div>
 </header>
 {% endblock %}
