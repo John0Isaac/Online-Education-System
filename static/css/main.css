@@ -145,7 +145,7 @@ header  .welcome-msg .all .right .parent a{
     
 }
 header  .all .right .overlayy{
-     min-width:100%;
+    min-width:95%;
     height: 100%;
     z-index: -1;
     position: absolute;
